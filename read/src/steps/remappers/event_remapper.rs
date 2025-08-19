@@ -775,11 +775,15 @@ mod tests {
         );
         assert_eq!(
             activity.seller.as_deref().unwrap(),
-            "0x8c557bb0a12d47c1eda90dd4883b44674111b915fa39ff862e6a0a39140dcd4"
+            standardize_address(
+                "0x8c557bb0a12d47c1eda90dd4883b44674111b915fa39ff862e6a0a39140dcd4"
+            )
         );
         assert_eq!(
             activity.creator_address.as_deref().unwrap(),
-            "0x43ec2cb158e3569842d537740fd53403e992b9e7349cc5d3dfaa5aff8faaef2"
+            standardize_address(
+                "0x43ec2cb158e3569842d537740fd53403e992b9e7349cc5d3dfaa5aff8faaef2"
+            )
         );
         assert_eq!(activity.collection_name.as_deref().unwrap(), "Bruh Bears");
         assert_eq!(activity.token_name.as_deref().unwrap(), "Bruh Bear #3770");
@@ -791,7 +795,9 @@ mod tests {
         assert_eq!(listing.price, 398000000);
         assert_eq!(
             listing.seller,
-            Some("0x8c557bb0a12d47c1eda90dd4883b44674111b915fa39ff862e6a0a39140dcd4".to_string())
+            Some(standardize_address(
+                "0x8c557bb0a12d47c1eda90dd4883b44674111b915fa39ff862e6a0a39140dcd4"
+            ))
         );
         assert_eq!(listing.marketplace, "test_marketplace");
         assert!(listing.is_deleted);

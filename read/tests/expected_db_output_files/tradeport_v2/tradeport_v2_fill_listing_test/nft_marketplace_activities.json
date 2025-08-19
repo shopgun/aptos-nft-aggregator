@@ -108,7 +108,7 @@
     "price": 165000000,
     "token_amount": null,
     "buyer": null,
-    "seller": "0x8c557bb0a12d47c1eda90dd4883b44674111b915fa39ff862e6a0a39140dcd4",
+    "seller": "0x08c557bb0a12d47c1eda90dd4883b44674111b915fa39ff862e6a0a39140dcd4",
     "listing_id": "0xf0d4384157e8c7caac07e0866c4c65fa9df8151c329edf58b825ff7e9b72baf8",
     "offer_id": null,
     "json_data": {
@@ -156,7 +156,7 @@
     "price": 166240000,
     "token_amount": null,
     "buyer": null,
-    "seller": "0x8c557bb0a12d47c1eda90dd4883b44674111b915fa39ff862e6a0a39140dcd4",
+    "seller": "0x08c557bb0a12d47c1eda90dd4883b44674111b915fa39ff862e6a0a39140dcd4",
     "listing_id": "0xd14be2c5e5a6f5b0c1181c4d2f28b84511a1abed28eb49c88a7c67b248bd2d9d",
     "offer_id": null,
     "json_data": {
